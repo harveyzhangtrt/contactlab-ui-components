@@ -52,6 +52,9 @@ suite('<dropdown-clab>', function() {
 			assert.equal(dropdown.maxInView, 4);
 			assert.isUndefined(dropdown.noteType);
       assert.equal(dropdown.maxHeight, 28);
+      assert.isFalse(dropdown.search);
+      assert.equal(dropdown.searchValue, '');
+      assert.isArray(dropdown.optionsList);
 		});
 
 	});
