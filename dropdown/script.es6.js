@@ -139,7 +139,7 @@ export class DropdownClab {
   _toggleList(evt) {
     if(!this.disabled) {
       this.$.curtain.open = !this.$.curtain.open;
-      !this.search ? this.querySelector('.value_wrapper').classList.toggle('active') : null;
+      // !this.search ? this.querySelector('.value_wrapper').classList.toggle('active') : null;
     }
 
     let windowClick = (evt) => {
@@ -154,7 +154,7 @@ export class DropdownClab {
         return;
       } else {
         this.$.curtain.open = false;
-        !this.search ? this.querySelector('.value_wrapper').classList.remove('active') : null;
+        // !this.search ? this.querySelector('.value_wrapper').classList.remove('active') : null;
         window.removeEventListener('mousedown', windowClick);
       }
     }
@@ -208,7 +208,7 @@ export class DropdownClab {
     this.set('selected', item);
     this.set('highlighted', item);
     this.$.curtain.open = false;
-    !this.search ? this.querySelector('.value_wrapper').classList.remove('active') : null;
+    // !this.search ? this.querySelector('.value_wrapper').classList.remove('active') : null;
     this.searchValue = this.selected[this.labelField];
 
     if(!this.preventChange) {
@@ -284,12 +284,13 @@ export class DropdownClab {
     return arr.join(' ');
   }
 
-  _compType(str, disabled, type, id) {
+  _compType(str, disabled, type, id, open) {
     let arr = [];
     if(str != undefined && str.length > 0) arr.push(str);
     if(id != undefined && id.length > 0) arr.push(id);
     if(disabled) arr.push('disabled');
     if(type != undefined && type.length > 0) arr.push(type);
+    open ? arr.push('active') : null;
     return arr.join(' ');
   }
 

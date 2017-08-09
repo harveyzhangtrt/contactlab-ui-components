@@ -18621,7 +18621,7 @@ var AutoCompleteClab = exports.AutoCompleteClab = function () {
         method: 'GET'
       }).then(function (res) {
         if (res.status !== 200) {
-
+          console.log('Looks like there was a problem. Status Code: ' + res.status);
           _this2.type = 'error';
           _this2._resetSpinnerTimeout();
           return;
@@ -19660,7 +19660,7 @@ var DropdownClab = exports.DropdownClab = function () {
 
       if (!this.disabled) {
         this.$.curtain.open = !this.$.curtain.open;
-        !this.search ? this.querySelector('.value_wrapper').classList.toggle('active') : null;
+        // !this.search ? this.querySelector('.value_wrapper').classList.toggle('active') : null;
       }
 
       var windowClick = function windowClick(evt) {
@@ -19675,7 +19675,7 @@ var DropdownClab = exports.DropdownClab = function () {
           return;
         } else {
           _this.$.curtain.open = false;
-          !_this.search ? _this.querySelector('.value_wrapper').classList.remove('active') : null;
+          // !this.search ? this.querySelector('.value_wrapper').classList.remove('active') : null;
           window.removeEventListener('mousedown', windowClick);
         }
       };
@@ -19715,7 +19715,7 @@ var DropdownClab = exports.DropdownClab = function () {
         method: 'GET'
       }).then(function (res) {
         if (res.status !== 200) {
-
+          console.log('Looks like there was a problem. Status Code: ' + res.status);
           _this3.type = 'error';
           return;
         }
@@ -19736,7 +19736,7 @@ var DropdownClab = exports.DropdownClab = function () {
       this.set('selected', item);
       this.set('highlighted', item);
       this.$.curtain.open = false;
-      !this.search ? this.querySelector('.value_wrapper').classList.remove('active') : null;
+      // !this.search ? this.querySelector('.value_wrapper').classList.remove('active') : null;
       this.searchValue = this.selected[this.labelField];
 
       if (!this.preventChange) {
@@ -19820,12 +19820,13 @@ var DropdownClab = exports.DropdownClab = function () {
     }
   }, {
     key: "_compType",
-    value: function _compType(str, disabled, type, id) {
+    value: function _compType(str, disabled, type, id, open) {
       var arr = [];
       if (str != undefined && str.length > 0) arr.push(str);
       if (id != undefined && id.length > 0) arr.push(id);
       if (disabled) arr.push('disabled');
       if (type != undefined && type.length > 0) arr.push(type);
+      open ? arr.push('active') : null;
       return arr.join(' ');
     }
   }, {
@@ -20413,6 +20414,7 @@ var MultipleClab = exports.MultipleClab = function () {
           method: 'GET'
         }).then(function (res) {
           if (res.status !== 200) {
+            console.log('Looks like there was a problem. Status Code: ' + res.status);
 
             window.clearTimeout(timeoutID);
             timeoutID = undefined;
@@ -20482,6 +20484,7 @@ var MultipleClab = exports.MultipleClab = function () {
         } else {
           this._selectThis(evt.target);
         }
+        console.log('##', this.selected);
       } else if (this.shift) {
         //adding multiple select
         if (this.lastSelected != undefined) this._selectThese(evt.target.getAttribute('data-index'));
@@ -20530,7 +20533,7 @@ var MultipleClab = exports.MultipleClab = function () {
             method: 'GET'
           }).then(function (res) {
             if (res.status !== 200) {
-
+              console.log('Looks like there was a problem. Status Code: ' + res.status);
               if (typeof timeoutID == 'number') {
                 window.clearTimeout(timeoutID);
                 timeoutID = undefined;
