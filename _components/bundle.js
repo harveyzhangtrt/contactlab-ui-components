@@ -18621,7 +18621,7 @@ var AutoCompleteClab = exports.AutoCompleteClab = function () {
         method: 'GET'
       }).then(function (res) {
         if (res.status !== 200) {
-          console.log('Looks like there was a problem. Status Code: ' + res.status);
+
           _this2.type = 'error';
           _this2._resetSpinnerTimeout();
           return;
@@ -19595,6 +19595,10 @@ var DropdownClab = exports.DropdownClab = function () {
           type: Boolean,
           value: false
         },
+        open: {
+          type: Boolean,
+          value: false
+        },
         labelSize: {
           type: String,
           value: ''
@@ -19659,7 +19663,7 @@ var DropdownClab = exports.DropdownClab = function () {
       var _this = this;
 
       if (!this.disabled) {
-        this.$.curtain.open = !this.$.curtain.open;
+        this.open = !this.open;
         // !this.search ? this.querySelector('.value_wrapper').classList.toggle('active') : null;
       }
 
@@ -19674,7 +19678,7 @@ var DropdownClab = exports.DropdownClab = function () {
           window.removeEventListener('mousedown', windowClick);
           return;
         } else {
-          _this.$.curtain.open = false;
+          _this.open = false;
           // !this.search ? this.querySelector('.value_wrapper').classList.remove('active') : null;
           window.removeEventListener('mousedown', windowClick);
         }
@@ -19715,7 +19719,7 @@ var DropdownClab = exports.DropdownClab = function () {
         method: 'GET'
       }).then(function (res) {
         if (res.status !== 200) {
-          console.log('Looks like there was a problem. Status Code: ' + res.status);
+
           _this3.type = 'error';
           return;
         }
@@ -19735,7 +19739,7 @@ var DropdownClab = exports.DropdownClab = function () {
       this.optionsList = this.options.slice();
       this.set('selected', item);
       this.set('highlighted', item);
-      this.$.curtain.open = false;
+      this.open = false;
       // !this.search ? this.querySelector('.value_wrapper').classList.remove('active') : null;
       this.searchValue = this.selected[this.labelField];
 
@@ -20414,7 +20418,6 @@ var MultipleClab = exports.MultipleClab = function () {
           method: 'GET'
         }).then(function (res) {
           if (res.status !== 200) {
-            console.log('Looks like there was a problem. Status Code: ' + res.status);
 
             window.clearTimeout(timeoutID);
             timeoutID = undefined;
@@ -20484,7 +20487,6 @@ var MultipleClab = exports.MultipleClab = function () {
         } else {
           this._selectThis(evt.target);
         }
-        console.log('##', this.selected);
       } else if (this.shift) {
         //adding multiple select
         if (this.lastSelected != undefined) this._selectThese(evt.target.getAttribute('data-index'));
@@ -20533,7 +20535,7 @@ var MultipleClab = exports.MultipleClab = function () {
             method: 'GET'
           }).then(function (res) {
             if (res.status !== 200) {
-              console.log('Looks like there was a problem. Status Code: ' + res.status);
+
               if (typeof timeoutID == 'number') {
                 window.clearTimeout(timeoutID);
                 timeoutID = undefined;

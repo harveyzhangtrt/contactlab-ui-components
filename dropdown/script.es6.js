@@ -74,6 +74,10 @@ export class DropdownClab {
         type: Boolean,
         value: false
       },
+      open: {
+        type: Boolean,
+        value: false
+      },
       labelSize: {
         type: String,
         value: ''
@@ -138,7 +142,7 @@ export class DropdownClab {
   ----------*/
   _toggleList(evt) {
     if(!this.disabled) {
-      this.$.curtain.open = !this.$.curtain.open;
+      this.open = !this.open;
       // !this.search ? this.querySelector('.value_wrapper').classList.toggle('active') : null;
     }
 
@@ -153,7 +157,7 @@ export class DropdownClab {
         window.removeEventListener('mousedown', windowClick);
         return;
       } else {
-        this.$.curtain.open = false;
+        this.open = false;
         // !this.search ? this.querySelector('.value_wrapper').classList.remove('active') : null;
         window.removeEventListener('mousedown', windowClick);
       }
@@ -207,7 +211,7 @@ export class DropdownClab {
     this.optionsList = this.options.slice();
     this.set('selected', item);
     this.set('highlighted', item);
-    this.$.curtain.open = false;
+    this.open = false;
     // !this.search ? this.querySelector('.value_wrapper').classList.remove('active') : null;
     this.searchValue = this.selected[this.labelField];
 

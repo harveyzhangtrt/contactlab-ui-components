@@ -9058,7 +9058,7 @@ this.fire('dom-change');
 
       <div class="input">
         <template is="dom-if" if="[[!search]]">
-          <div class$="[[_compType('value_wrapper', disabled, type, id)]]" on-tap="_toggleList">
+          <div class$="[[_compType('value_wrapper', disabled, type, id, open)]]" on-tap="_toggleList">
             <template is="dom-if" if="[[_viewValue(selected,labelField)]]">
               <span class="selected">[[_compLabel(selected)]]</span>
             </template>
@@ -9070,7 +9070,7 @@ this.fire('dom-change');
         <template is="dom-if" if="[[search]]">
           <input-clab on-click="_toggleList" on-keyup="_filter" value="[[searchValue]]"></input-clab>
         </template>
-        <curtain-clab id="curtain" slot="curtain" options="[[optionsList]]" max-height="[[_compMaxHeight(maxHeight)]]" highlighted="[[highlighted]]" label-field="[[labelField]]" value-field="[[valueField]]" max-in-view="[[maxInView]]" on-do-highlight="_handleHighlight" on-do-select="handleSelect"></curtain-clab>
+        <curtain-clab id="curtain" slot="curtain" options="[[optionsList]]" max-height="[[_compMaxHeight(maxHeight)]]" highlighted="[[highlighted]]" label-field="[[labelField]]" value-field="[[valueField]]" max-in-view="[[maxInView]]" on-do-highlight="_handleHighlight" on-do-select="handleSelect" open="[[open]]"></curtain-clab>
       </div>
 
       <slot name="button"></slot>
@@ -28760,6 +28760,10 @@ var DropdownClab = exports.DropdownClab = function () {
           type: Boolean,
           value: false
         },
+        open: {
+          type: Boolean,
+          value: false
+        },
         labelSize: {
           type: String,
           value: ''
@@ -28824,8 +28828,8 @@ var DropdownClab = exports.DropdownClab = function () {
       var _this = this;
 
       if (!this.disabled) {
-        this.$.curtain.open = !this.$.curtain.open;
-        !this.search ? this.querySelector('.value_wrapper').classList.toggle('active') : null;
+        this.open = !this.open;
+        // !this.search ? this.querySelector('.value_wrapper').classList.toggle('active') : null;
       }
 
       var windowClick = function windowClick(evt) {
@@ -28839,8 +28843,8 @@ var DropdownClab = exports.DropdownClab = function () {
           window.removeEventListener('mousedown', windowClick);
           return;
         } else {
-          _this.$.curtain.open = false;
-          !_this.search ? _this.querySelector('.value_wrapper').classList.remove('active') : null;
+          _this.open = false;
+          // !this.search ? this.querySelector('.value_wrapper').classList.remove('active') : null;
           window.removeEventListener('mousedown', windowClick);
         }
       };
@@ -28900,8 +28904,8 @@ var DropdownClab = exports.DropdownClab = function () {
       this.optionsList = this.options.slice();
       this.set('selected', item);
       this.set('highlighted', item);
-      this.$.curtain.open = false;
-      !this.search ? this.querySelector('.value_wrapper').classList.remove('active') : null;
+      this.open = false;
+      // !this.search ? this.querySelector('.value_wrapper').classList.remove('active') : null;
       this.searchValue = this.selected[this.labelField];
 
       if (!this.preventChange) {
@@ -28985,12 +28989,13 @@ var DropdownClab = exports.DropdownClab = function () {
     }
   }, {
     key: "_compType",
-    value: function _compType(str, disabled, type, id) {
+    value: function _compType(str, disabled, type, id, open) {
       var arr = [];
       if (str != undefined && str.length > 0) arr.push(str);
       if (id != undefined && id.length > 0) arr.push(id);
       if (disabled) arr.push('disabled');
       if (type != undefined && type.length > 0) arr.push(type);
+      open ? arr.push('active') : null;
       return arr.join(' ');
     }
   }, {
