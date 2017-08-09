@@ -256,7 +256,7 @@ export class DropdownClab {
   }
 
   _updateList(newValue, oldValue) {
-    this.optionsList = newValue.slice();
+    this.optionsList = newValue ? newValue.slice() : this.optionsList;
   }
 
 

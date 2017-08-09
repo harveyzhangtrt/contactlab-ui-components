@@ -19789,7 +19789,7 @@ var DropdownClab = exports.DropdownClab = function () {
   }, {
     key: "_updateList",
     value: function _updateList(newValue, oldValue) {
-      this.optionsList = newValue.slice();
+      this.optionsList = newValue ? newValue.slice() : this.optionsList;
     }
 
     /*----------
