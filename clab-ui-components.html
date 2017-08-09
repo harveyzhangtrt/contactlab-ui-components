@@ -28951,8 +28951,9 @@ var DropdownClab = exports.DropdownClab = function () {
   }, {
     key: "_updateList",
     value: function _updateList(newValue, oldValue) {
+      var selected = this.selected;
       this.optionsList = newValue ? newValue.slice() : this.optionsList;
-      this.searchValue = this.selected[this.labelField];
+      this.searchValue = selected ? selected[this.labelField] : null;
     }
 
     /*----------

@@ -253,8 +253,9 @@ export class DropdownClab {
   }
 
   _updateList(newValue, oldValue) {
+    const selected = this.selected;
     this.optionsList = newValue ? newValue.slice() : this.optionsList;
-    this.searchValue = this.selected[this.labelField];
+    this.searchValue = selected ? selected[this.labelField] : null;
   }
 
 
