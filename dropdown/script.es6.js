@@ -143,7 +143,6 @@ export class DropdownClab {
   _toggleList(evt) {
     if(!this.disabled) {
       this.open = !this.open;
-      // !this.search ? this.querySelector('.value_wrapper').classList.toggle('active') : null;
     }
 
     let windowClick = (evt) => {
@@ -158,7 +157,6 @@ export class DropdownClab {
         return;
       } else {
         this.open = false;
-        // !this.search ? this.querySelector('.value_wrapper').classList.remove('active') : null;
         window.removeEventListener('mousedown', windowClick);
       }
     }
@@ -212,7 +210,6 @@ export class DropdownClab {
     this.set('selected', item);
     this.set('highlighted', item);
     this.open = false;
-    // !this.search ? this.querySelector('.value_wrapper').classList.remove('active') : null;
     this.searchValue = this.selected[this.labelField];
 
     if(!this.preventChange) {
@@ -257,6 +254,7 @@ export class DropdownClab {
 
   _updateList(newValue, oldValue) {
     this.optionsList = newValue ? newValue.slice() : this.optionsList;
+    this.searchValue = this.selected[this.labelField];
   }
 
 
